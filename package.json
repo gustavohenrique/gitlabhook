@@ -1,0 +1,24 @@
+{
+  "name": "gitlabhook",
+  "version": "0.1.0",
+  "description": "Run Docker containers after webhook notification",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "brainn",
+    "gitlab"
+  ],
+  "engines": {
+    "node": ">=8.10.0",
+    "npm": ">=5.6.0"
+  },
+  "author": "brainn.co",
+  "private": true,
+  "license": "UNLICENSED",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3"
+  }
+}

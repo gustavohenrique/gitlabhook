@@ -1,8 +1,8 @@
 (function () {
 
   var spawn = require('child_process').spawn;
-  var script = '/opt/gitlabhook/deploy.sh';
-  var APP_DIR = '/tmp/users-api';
+  var SCRIPT_DIR = '/opt/gitlabhook/deploy/';
+  var CLONE_DIR = '/tmp/';
 
   function deploy (data) {
     function isPushed(branch, data) {
@@ -19,8 +19,9 @@
     }
     try {
       var repo = data['project']['git_ssh_url'];
-      var tag = data['repository']['name'];
-      var child = spawn(script, [repo, APP_DIR, tag]);
+      var project = data['repository']['name'];
+      var script = SCRIPT_DIR + project + '.sh'
+      var child = spawn(script, [repo, CLONE_DIR, project]);
       process.stdin.pipe(child.stdin);
       child.stdout.on('data', function (res) {
         console.log('' + res);
@@ -41,6 +42,10 @@
     });
 
     return res.status(200).json({});
+  };
+
+  this.healthcheck = function (req, res) {
+    return res.send('ok')
   };
 
   module.exports = this;

@@ -7,7 +7,7 @@ tag=$3
 rm -rf ${dest} 2>/dev/null
 git clone "${repo}" "${dest}"
 cd ${dest}
-cp /etc/users-api ${dest}/.env
+cp /etc/${tag} ${dest}/.env
 docker rm -f ${tag} 2>/dev/null
 docker build . -t=${tag}
 docker run -d -p 3000:3000 --name ${tag} ${tag}
